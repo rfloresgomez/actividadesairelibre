@@ -1,0 +1,30 @@
+# app/config/securtity.yml
+security:
+    encoders:
+        AppBundle\Entity\Users:
+            algorithm: bcrypt
+
+    providers:
+        user_provider:
+            entity:
+                class: AppBundle:Users
+                property: username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path: /logout
+                target: /login
+
+    access_control:
+        - { path: ^/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,0 +1,36 @@
+{% extends '::layout.html.twig' %}
+
+{% block contenido %}
+    <h2>Listado de noticias</h2>
+    <div class="row">
+        <div class="col s12"><a class="btn btn-floating pulse left s12 m10" href="{{ path('news_new') }}"><i class="material-icons">add</i></a></div>
+        {% for new in news %}
+            <div class="col s12 m6 l6 xl6">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        {% if new.image == null %}
+                            <img class="responsive-img" src="{{ asset('assets/images/noticia.jpg') }}">
+                        {% else %}
+                            <img class="responsive-img" src="{{ asset('assets/images/' ~ new.image) }}">
+                        {% endif %}
+                    </div>
+                    <div class="card-content">
+                    <span class="card-title activator light-green-text text-darken-2"><h4>{{ new.title }}<i
+                                    class="material-icons right">more_vert</i></h4></span>
+
+                        <p>
+                            <a class="waves-effect waves-light btn" href="{{ path('news_delete', { 'id': new.id }) }}">Ver</a>
+                            <a class="waves-effect waves-light btn" href="{{ path('news_edit', { 'id': new.id }) }}">Editar</a>
+                        </p>
+                    </div>
+                    <div class="card-reveal">
+                    <span class="card-title light-green-text text-darken-2"><h3>{{ new.title }}<i
+                                    class="material-icons right">close</i></h3></span>
+
+                        <p>{{ new.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

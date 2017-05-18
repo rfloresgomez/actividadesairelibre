@@ -1,0 +1,23 @@
+{% extends '::layout.html.twig' %}
+
+{% block contenido %}
+    <div>
+        <h2 class="light-green-text text-darken-2">{{ news.title }}</h2>
+
+        {% if news.image == null %}
+            <img class="responsive-img" src="{{ asset('assets/images/noticia.jpg') }}">
+        {% else %}
+            <img class="responsive-img" src="{{ asset('assets/images/' ~ news.image) }}">
+        {% endif %}
+
+        <p>{{ news.description }}</p>
+
+        {#<p>#}
+            {#{{ form_start(delete_form) }}#}
+            {#<a class="waves-effect waves-light btn" href="{{ path('news_edit', { 'id': news.id }) }}">Editar</a>#}
+            {#<input class="waves-effect waves-light btn" type="submit" value="Eliminar">#}
+            {#{{ form_end(delete_form) }}#}
+        {#</p>#}
+    </div>
+    {#<a href="{{ path('users_index') }}">Ins</a>#}
+{% endblock %}

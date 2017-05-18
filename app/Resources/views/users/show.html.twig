@@ -1,0 +1,42 @@
+{% extends '::layout.html.twig' %}
+
+{% block contenido %}
+    <a class="btn" href="{{ path('logout') }}">Logout</a>
+
+    <h2>{{ user.userName }}</h2>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            {#<tr>#}
+                {#<th>Pass</th>#}
+                {#<td>{{ user.password }}</td>#}
+            {#</tr>#}
+            <tr>
+                <th>Mail</th>
+                <td>{{ user.mail }}</td>
+            </tr>
+            <tr>
+                <th>Twitter</th>
+                <td><a href="https://twitter.com/{{ user.redes }}" target="_blank">{{ user.redes }}</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        {#<li>#}
+            {#<a href="{{ path('users_index') }}">Back to the list</a>#}
+        {#</li>#}
+        <li>
+            <a class="btn" href="{{ path('users_edit', { 'id': user.id }) }}">Editar mi usuario</a>
+        </li>
+        <li>
+            {#{{ form_start(delete_form) }}#}
+                {#<input type="submit" value="Delete">#}
+            {#{{ form_end(delete_form) }}#}
+        </li>
+    </ul>
+{% endblock %}

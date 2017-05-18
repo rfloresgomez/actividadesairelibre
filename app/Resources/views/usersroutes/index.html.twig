@@ -1,0 +1,37 @@
+{% extends '::layout.html.twig' %}
+
+{% block contenido %}
+    <h1>Usersroutes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for usersRoute in usersRoutes %}
+            <tr>
+                <td><a href="{{ path('usersroutes_show', { 'id': usersRoute.id }) }}">{{ usersRoute.id }}</a></td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('usersroutes_show', { 'id': usersRoute.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('usersroutes_edit', { 'id': usersRoute.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('usersroutes_new') }}">Create a new usersRoute</a>
+        </li>
+    </ul>
+{% endblock %}

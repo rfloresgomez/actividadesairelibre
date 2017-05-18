@@ -1,0 +1,46 @@
+{% extends '::layout.html.twig' %}
+
+{% block contenido %}
+    <h2 class="center-align">Editar ruta</h2>
+
+    {{ form_start(edit_form) }}
+
+    <div class="hide">
+        {{ form_widget(edit_form.owner) }}
+        {{ form_label(edit_form.owner) }}
+        {{ form_errors(edit_form.owner) }}
+        {#{{ form_row(edit_form.owner) }}#}
+
+    </div>
+    <div class="hide">
+        {{ form_widget(edit_form.createdDate) }}
+        {{ form_label(edit_form.createdDate) }}
+        {{ form_errors(edit_form.createdDate) }}
+        {#{{ form_row(edit_form.createdDate) }}#}
+
+    </div>
+    <div class="hide">
+        {{ form_widget(edit_form.updatedDate) }}
+        {{ form_label(edit_form.updatedDate) }}
+        {{ form_errors(edit_form.updatedDate) }}
+        {#{{ form_row(edit_form.updatedDate) }}#}
+
+    </div>
+
+    {{ form_widget(edit_form) }}
+    <input class="btn" type="submit" value="Editar"/>
+    {{ form_end(edit_form) }}
+
+    <div>
+        <p>
+            <a class="btn" href="{{ path('homepage') }}">Volver</a>
+        </p>
+
+        <p>
+            {{ form_start(delete_form) }}
+            <input class="btn" type="submit" value="Eliminar ruta">
+            {{ form_end(delete_form) }}
+        </p>
+    </div>
+
+{% endblock %}

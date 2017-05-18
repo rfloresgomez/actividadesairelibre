@@ -1,0 +1,38 @@
+.card-image img
+{
+    height: 20em;
+    position: fixed;
+}
+
+.imagen-logo{
+    margin: 12px 0;
+}
+
+form i{
+    margin: 5px !important;
+}
+
+header{
+    text-align: center;
+}
+
+#header-logo{
+    width: 50% !important;
+}
+
+#appbundle_users:last-child{
+    display: none !important;
+}
+
+.btn{
+    background-color: #689f38;
+}
+
+h2{
+    color: #689f38;
+    text-align: center;
+}
+
+h5{
+    color: #558b2f;
+}

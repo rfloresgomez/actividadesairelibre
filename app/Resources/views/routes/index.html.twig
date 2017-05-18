@@ -1,0 +1,39 @@
+{% extends '::layout.html.twig' %}
+
+{% block contenido %}
+    <div class="row">
+        {% for route in routes %}
+
+            <div class="col s12 m6 l5 xl6">
+                <div class="card">
+                    <div class="card-image">
+                        {% if route.route.image == null %}
+                            <img class="responsive-img" src="{{ asset('assets/images/sample-1.jpg') }}">
+                        {% else %}
+                            <img class="responsive-img" src="{{ asset('assets/images/' ~ route.route.image) }}">
+                        {% endif %}
+                        <span class="card-title">{{ route.route.name }}</span>
+                    </div>
+                    <div class="card-content">
+                        <p>{{ route.route.description }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ path('routes_show', { 'id': route.route.id }) }}">Ver detalles</a>
+                        {% set isUser = false %}
+                        {% for user in route.users %}
+                            {% if userLoged.id == user.idUser.id %}
+                                {% set isUser = true %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if isUser %}
+                            <a href="{{ path('usersroutes_delete', { 'id': route.route.id }) }}">Quitarse</a>
+                        {% else %}
+                            <a href="{{ path('usersroutes_new', { 'id': route.route.id }) }}">Unirse</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+{% endblock %}

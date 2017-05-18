@@ -1,0 +1,43 @@
+{% extends '::layout.html.twig' %}
+
+{% block contenido %}
+
+    <div class="row">
+        <h2 class=" center-align light-green-text text-darken-2 s12">{{ route.name }}</h2>
+
+        <div class="col center-align s12 m6">
+            {% if route.image == null %}
+                <img class="responsive-img route_img" src="{{ asset('assets/images/sample-1.jpg') }}">
+            {% else %}
+                <img class="responsive-img route_img" src="{{ asset('assets/images/' ~ route.image) }}">
+            {% endif %}
+        </div>
+        <div class="col s12 m6">
+
+            <div>
+                <h5 class="light-green-text text-darken-3">Descripción de la ruta.</h5>
+                <p>{{ route.description }}</p>
+            </div>
+
+            <div id="content_mapa">
+                <h5 class="light-green-text text-darken-3">¿Dónde y cuando tendrá lugar la ruta?</h5>
+                <p>La ruta tendrá lugar el día <b>{{ route.date|date('d-m-Y') }}</b> en <b>{{ route.city }}</b>.</p>
+            </div>
+
+            <div>
+                <h5 class="light-green-text text-darken-3">Tipo y dificultad de la ruta.</h5>
+                <p>Tipo de ruta: <b>{{ route.type }}</b></p>
+                <p>Dificultad de la ruta: <b>{{ route.dificult }}</b></p>
+            </div>
+
+            <div>
+                <h5 class="light-green-text text-darken-3">Recomendaciones.</h5>
+                <p>{{ route.memo }}</p>
+            </div>
+        </div>
+        <div class="col s12">
+            <a class="btn" href="{{ path('homepage') }}">Volver</a>
+            <a class="btn" href="{{ path('routes_edit', { 'id': route.id }) }}">Editar</a>
+        </div>
+    </div>
+{% endblock %}

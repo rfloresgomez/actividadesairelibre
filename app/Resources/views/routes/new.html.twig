@@ -1,0 +1,35 @@
+{% extends '::layout.html.twig' %}
+
+{% block contenido %}
+    <h1 class="center">Crear Rutas</h1>
+
+    {{ form_start(form) }}
+
+        <div class="hide">
+            {{ form_widget(form.owner) }}
+            {{ form_label(form.owner) }}
+            {{ form_errors(form.owner) }}
+            {#{{ form_row(form.owner) }}#}
+
+        </div>
+        <div class="hide">
+            {{ form_widget(form.createdDate) }}
+            {{ form_label(form.createdDate) }}
+            {{ form_errors(form.createdDate) }}
+            {#{{ form_row(form.createdDate) }}#}
+
+        </div>
+        <div class="hide">
+            {{ form_widget(form.updatedDate) }}
+            {{ form_label(form.updatedDate) }}
+            {{ form_errors(form.updatedDate) }}
+            {#{{ form_row(form.updatedDate) }}#}
+
+        </div>
+
+        {{ form_widget(form) }}
+        <input class="btn" type="submit" value="Crear" />
+        <a  class="btn" href="{{ path('homepage') }}">Volver</a>
+    {{ form_end(form) }}
+    <p></p>
+{% endblock %}

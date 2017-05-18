@@ -1,0 +1,62 @@
+<?php
+
+namespace AppBundle\Form;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
+class RoutesType extends AbstractType
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('owner')
+            ->add('name')
+            ->add('description')
+            ->add('city')
+            ->add('type', ChoiceType::class, array(
+                'choices'  => array(
+                    'Asfalto' => 'Asfalto',
+                    'Vía verde' => 'Vía Verde',
+                    'Camino mozárabe' => 'Camino mozárabe',
+                    'Trail' => 'Trail',
+                    'Montaña' => 'Monataña',
+                ),))
+            ->add('dificult', ChoiceType::class, array(
+                'choices'  => array(
+                    'Fácil' => 'Fácil',
+                    'Media' => 'Media',
+                    'Dificil' => 'Dificil',
+                ),))
+            ->add('date')
+            ->add('image')
+            ->add('memo')
+            ->add('createdDate')
+            ->add('updatedDate');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'AppBundle\Entity\Routes'
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'appbundle_routes';
+    }
+
+
+}

@@ -143,9 +143,23 @@ class RoutesController extends Controller
         $editForm = $this->createForm('AppBundle\Form\RoutesType', $route);
         $editForm->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+
+        $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
+        $users = $repositoryUsersRoutes->findBy(['idRoute'=>$route->getId()]);
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $route->setUpdatedDate(new \DateTime("now"));
             $this->getDoctrine()->getManager()->flush();
+
+            foreach ($users as $user){
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Información')
+                    ->setFrom('r.carlosfloresgomez@gmail.com')
+                    ->setTo($user->getIdUser()->getMail())
+                    ->setBody('La ruta '.$route->getName().' a la que estás unido ha sido modificada.');
+                $this->get('mailer')->send($message);
+            }
 
             return $this->redirectToRoute('routes_show', array('id' => $route->getId()));
         }

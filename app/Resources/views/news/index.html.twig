@@ -3,7 +3,9 @@
 {% block contenido %}
     <h2>Listado de noticias</h2>
     <div class="row">
-        <div class="col s12"><a class="btn btn-floating pulse left s12 m10" href="{{ path('news_new') }}"><i class="material-icons">add</i></a></div>
+        {% if app.user and app.user.rol != "STANDARD" %}
+            <div class="col s12"><a class="btn btn-floating pulse left s12 m10" href="{{ path('news_new') }}"><i class="material-icons">add</i></a></div>
+        {% endif %}
         {% for new in news %}
             <div class="col s12 m6 l6 xl6">
                 <div class="card">
@@ -20,7 +22,9 @@
 
                         <p>
                             <a class="waves-effect waves-light btn" href="{{ path('news_delete', { 'id': new.id }) }}">Ver</a>
-                            <a class="waves-effect waves-light btn" href="{{ path('news_edit', { 'id': new.id }) }}">Editar</a>
+                            {% if app.user and (app.user.rol == "ADMIN" or app.user.id == new.owner) %}
+                                <a class="waves-effect waves-light btn" href="{{ path('news_edit', { 'id': new.id }) }}">Editar</a>
+                            {% endif %}
                         </p>
                     </div>
                     <div class="card-reveal">

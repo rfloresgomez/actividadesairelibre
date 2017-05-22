@@ -356,9 +356,9 @@ class Routes
      *
      * @return Routes
      */
-    public function setUpdatedDate()
+    public function setUpdatedDate($updated)
     {
-        $this->updatedDate = new \DateTime("now");
+        $this->updatedDate = $updated;
 
         return $this;
     }

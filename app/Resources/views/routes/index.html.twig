@@ -19,16 +19,18 @@
                     </div>
                     <div class="card-action">
                         <a href="{{ path('routes_show', { 'id': route.route.id }) }}">Ver detalles</a>
-                        {% set isUser = false %}
-                        {% for user in route.users %}
-                            {% if userLoged.id == user.idUser.id %}
-                                {% set isUser = true %}
+                        {% if app.user %}
+                            {% set isUser = false %}
+                            {% for user in route.users %}
+                                {% if userLoged.id == user.idUser.id %}
+                                    {% set isUser = true %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if isUser %}
+                                <a class="quitarse" href="{{ path('usersroutes_delete', { 'id': route.route.id }) }}">Unido</a>
+                            {% else %}
+                                <a href="{{ path('usersroutes_new', { 'id': route.route.id }) }}">Unirse</a>
                             {% endif %}
-                        {% endfor %}
-                        {% if isUser %}
-                            <a href="{{ path('usersroutes_delete', { 'id': route.route.id }) }}">Quitarse</a>
-                        {% else %}
-                            <a href="{{ path('usersroutes_new', { 'id': route.route.id }) }}">Unirse</a>
                         {% endif %}
                     </div>
                 </div>

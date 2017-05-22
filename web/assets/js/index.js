@@ -10,4 +10,12 @@ $( document ).ready(function(){
     });
     $('#textarea1').val('New Text');
     $('#textarea1').trigger('autoresize');
+
+    $(".quitarse").mouseenter(function () {
+        $(this).html("Quitarse");
+    });
+
+    $(".quitarse").mouseleave(function () {
+        $(this).html("Unido");
+    });
 });

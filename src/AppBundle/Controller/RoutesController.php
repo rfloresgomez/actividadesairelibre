@@ -55,6 +55,7 @@ class RoutesController extends Controller
 
         $route = new Routes();
         $route->setCreatedDate(new \DateTime("now"));
+        $route->setUpdatedDate(new \DateTime("now"));
         $route->setOwner($this->getUser()->getId());
         $form = $this->createForm('AppBundle\Form\RoutesType', $route);
         $form->handleRequest($request);
@@ -108,7 +109,7 @@ class RoutesController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $route->setUpdatedDate();
+            $route->setUpdatedDate(new \DateTime("now"));
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('routes_show', array('id' => $route->getId()));

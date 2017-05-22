@@ -19,25 +19,23 @@
                     </div>
                     <div class="card-action">
                         <a href="{{ path('routes_show', { 'id': route.route.id }) }}">Ver detalles</a>
+                        {% set isDate = false %}
+                        {% for r in rutasUnidas %}
+                            {% if route.route.date == r.idRoute.date %}
+                                {% set isDate = true %}
+                            {% endif %}
+                        {% endfor %}
                         {% if app.user %}
                             {% set isUser = false %}
-                            {% set isDate = false %}
                             {% for user in route.users %}
                                 {% if userLoged.id == user.idUser.id %}
                                     {% set isUser = true %}
-                                {% else %}
-                                    {% for r in rutas_unidas %}
-                                        <p>route.route.date</p>
-                                        {% if route.route.date == r.idRoute.date %}
-                                            {% set isDate = true %}
-                                        {% endif %}
-                                    {% endfor %}
                                 {% endif %}
                             {% endfor %}
-                            {% if isDate %}
-                                <a>Ya estás unido a una ruta el mismo día.</a>
-                            {% elseif isUser %}
-                                <a class="quitarse" href="{{ path('usersroutes_delete', { 'id': route.route.id }) }}">Unido</a>
+                            {% if isUser %}
+                                <a class="quitarse green-text" href="{{ path('usersroutes_delete', { 'id': route.route.id }) }}">Unido</a>
+                            {% elseif isDate %}
+                                <a class="red-text">Ya estás unido a una ruta el mismo día.</a>
                             {% else %}
                                 <a href="{{ path('usersroutes_new', { 'id': route.route.id }) }}">Unirse</a>
                             {% endif %}

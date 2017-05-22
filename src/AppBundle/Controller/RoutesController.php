@@ -29,6 +29,7 @@ class RoutesController extends Controller
         $routes = $em->getRepository('AppBundle:Routes')->findAll();
         /** @var usersRoutesRepository $repositoryUsersRoutes */
         $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
+        $rutasUnidas = $repositoryUsersRoutes->findBy(['idUser'=>$this->getUser()->getId()]);
         $data = [];
         foreach ($routes as $route){
             $usersRoutes = $repositoryUsersRoutes->findByIdRoute($route->getId());
@@ -38,7 +39,7 @@ class RoutesController extends Controller
         return $this->render('routes/index.html.twig', array(
             'routes' => $data,
             'userLoged' => $this->getUser(),
-            'rutas_unidas' => $repositoryUsersRoutes->findByIdUser($this->getUser()->getId()),
+            'rutasUnidas' => $rutasUnidas,
         ));
     }
 

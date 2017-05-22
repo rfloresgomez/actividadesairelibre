@@ -12,7 +12,7 @@
                         {% else %}
                             <img class="responsive-img" src="{{ asset('assets/images/' ~ route.route.image) }}">
                         {% endif %}
-                        <span class="card-title">{{ route.route.name }}</span>
+                        <span class="card-title">{{ route.route.name }} - {{ route.route.date|date("d-m-Y") }}</span>
                     </div>
                     <div class="card-content">
                         <p>{{ route.route.description }}</p>

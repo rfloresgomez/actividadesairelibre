@@ -29,18 +29,26 @@ class RoutesController extends Controller
         $routes = $em->getRepository('AppBundle:Routes')->findAll();
         /** @var usersRoutesRepository $repositoryUsersRoutes */
         $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
-        $rutasUnidas = $repositoryUsersRoutes->findBy(['idUser'=>$this->getUser()->getId()]);
+        // $rutasUnidas = $repositoryUsersRoutes->findBy(['idUser'=>$this->getUser()->getId()]);
         $data = [];
         foreach ($routes as $route){
             $usersRoutes = $repositoryUsersRoutes->findByIdRoute($route->getId());
             $data[] = new usersRoutesData($route, $usersRoutes);
         }
 
-        return $this->render('routes/index.html.twig', array(
-            'routes' => $data,
-            'userLoged' => $this->getUser(),
-            'rutasUnidas' => $rutasUnidas,
-        ));
+        if($this->getUser() != null){
+          return $this->render('routes/index.html.twig', array(
+              'routes' => $data,
+              'userLoged' => $this->getUser(),
+              'rutasUnidas' => $repositoryUsersRoutes->findBy(['idUser'=>$this->getUser()->getId()]),
+          ));
+        }
+        else {
+          return $this->render('routes/index.html.twig', array(
+              'routes' => $data,
+              'userLoged' => $this->getUser(),
+          ));
+        }
     }
 
     /**
@@ -107,9 +115,13 @@ class RoutesController extends Controller
     {
         $deleteForm = $this->createDeleteForm($route);
 
+        $em = $this->getDoctrine()->getManager();
+        $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
+
         return $this->render('routes/show.html.twig', array(
             'route' => $route,
             'delete_form' => $deleteForm->createView(),
+            'users_route' => $repositoryUsersRoutes->findBy(['idRoute'=>$route->getId()]),
         ));
     }
 

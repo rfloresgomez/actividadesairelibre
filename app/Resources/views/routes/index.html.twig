@@ -12,20 +12,20 @@
                         {% else %}
                             <img class="responsive-img" src="{{ asset('assets/images/' ~ route.route.image) }}">
                         {% endif %}
-                        <span class="card-title">{{ route.route.name }} - {{ route.route.date|date("d-m-Y") }}</span>
+                        <span class="card-title">{{ route.route.name }} - {{ route.route.date|date("d/m/Y") }}</span>
                     </div>
                     <div class="card-content">
                         <p>{{ route.route.description }}</p>
                     </div>
                     <div class="card-action">
                         <a href="{{ path('routes_show', { 'id': route.route.id }) }}">Ver detalles</a>
-                        {% set isDate = false %}
-                        {% for r in rutasUnidas %}
-                            {% if route.route.date == r.idRoute.date %}
-                                {% set isDate = true %}
-                            {% endif %}
-                        {% endfor %}
                         {% if app.user %}
+                          {% set isDate = false %}
+                          {% for r in rutasUnidas %}
+                              {% if route.route.date == r.idRoute.date %}
+                                  {% set isDate = true %}
+                              {% endif %}
+                          {% endfor %}
                             {% set isUser = false %}
                             {% for user in route.users %}
                                 {% if userLoged.id == user.idUser.id %}

@@ -23,7 +23,9 @@
                         <ul class="side-nav" id="mobile-demo">
                             <li><a href="{{ path('homepage') }}">Inicio</a></li>
                             <li><a href="{{ path('news_index') }}">Noticias</a></li>
-                            <li><a href="{{ path('routes_new') }}">Crear Rutas</a></li>
+                            {% if app.user %}
+                                <li><a href="{{ path('routes_new') }}">Crear Rutas</a></li>
+                            {% endif %}
                             <li><a href="{{ path('login') }}"><i class="large material-icons">perm_identity</i></a></li>
                         </ul>
                     </div>

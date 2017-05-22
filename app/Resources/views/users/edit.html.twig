@@ -4,15 +4,22 @@
     <h2>Editar Usuario</h2>
 
     {{ form_start(edit_form) }}
+    {% if app.user.rol != "ADMIN" %}
         <div class="input-field hide">
             {{ form_widget(edit_form.rol) }}
             {{ form_label(edit_form.rol) }}
             {{ form_errors(edit_form.rol) }}
-            {#{{ form_row(edit_form.rol) }}#}
 
+                {#{{ form_row(edit_form.rol) }}#}
         </div>
+    {% endif %}
         {{ form_widget(edit_form) }}
         <input class="btn" type="submit" value="Editar" />
     {{ form_end(edit_form) }}
+    {% if app.user.rol == "ADMIN" and user.rol != "ADMIN"%}
+        {{ form_start(delete_form) }}
+            <p><input class="btn" type="submit" value="Eliminar usuario"></p>
+        {{ form_end(delete_form) }}
+    {% endif %}
     <p></p>
 {% endblock %}

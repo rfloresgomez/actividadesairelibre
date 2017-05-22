@@ -38,6 +38,28 @@ class RoutesController extends Controller
         return $this->render('routes/index.html.twig', array(
             'routes' => $data,
             'userLoged' => $this->getUser(),
+            'rutas_unidas' => $repositoryUsersRoutes->findByIdUser($this->getUser()->getId()),
+        ));
+    }
+
+    /**
+     * Lists all route entities.
+     *
+     * @Route("list", name="list_routes")
+     * @Method("GET")
+     */
+    public function listAction()
+    {
+
+        if($this->getUser()->getRol() == null || $this->getUser()->getRol() != "ADMIN")
+            $this->redirectToRoute('homepage');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $routes = $em->getRepository('AppBundle:Routes')->findAll();
+
+        return $this->render(':routes:listado.html.twig', array(
+            'route' => $routes,
         ));
     }
 

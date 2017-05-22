@@ -22,6 +22,12 @@ class UsersController extends Controller
      */
     public function indexAction()
     {
+
+        if ($this->getUser() == null)
+            return $this->redirectToRoute('login');
+        if ($this->getUser()->getRol() != "ADMIN")
+            return $this->redirectToRoute('homepage');
+
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('AppBundle:Users')->findAll();
@@ -84,7 +90,7 @@ class UsersController extends Controller
     public function showAction(Users $user)
     {
 
-        if ($this->getUser() == null || $this->getUser() != $user)
+        if ($this->getUser()->getRol() != 'ADMIN' && ($this->getUser() == null || $user->getId() != $this->getUser()->getId()))
             return $this->redirectToRoute("homepage");
 
         $deleteForm = $this->createDeleteForm($user);
@@ -132,6 +138,10 @@ class UsersController extends Controller
      */
     public function deleteAction(Request $request, Users $user)
     {
+
+        if($this->getUser()->getRol() != "ADMIN")
+            return $this->redirectToRoute('homepage');
+
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
 

@@ -18,6 +18,7 @@ header{
 
 #header-logo{
     width: 50% !important;
+    margin-top: 5px;
 }
 
 #appbundle_users:last-child{

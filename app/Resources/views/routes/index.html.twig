@@ -21,12 +21,22 @@
                         <a href="{{ path('routes_show', { 'id': route.route.id }) }}">Ver detalles</a>
                         {% if app.user %}
                             {% set isUser = false %}
+                            {% set isDate = false %}
                             {% for user in route.users %}
                                 {% if userLoged.id == user.idUser.id %}
                                     {% set isUser = true %}
+                                {% else %}
+                                    {% for r in rutas_unidas %}
+                                        <p>route.route.date</p>
+                                        {% if route.route.date == r.idRoute.date %}
+                                            {% set isDate = true %}
+                                        {% endif %}
+                                    {% endfor %}
                                 {% endif %}
                             {% endfor %}
-                            {% if isUser %}
+                            {% if isDate %}
+                                <a>Ya estás unido a una ruta el mismo día.</a>
+                            {% elseif isUser %}
                                 <a class="quitarse" href="{{ path('usersroutes_delete', { 'id': route.route.id }) }}">Unido</a>
                             {% else %}
                                 <a href="{{ path('usersroutes_new', { 'id': route.route.id }) }}">Unirse</a>

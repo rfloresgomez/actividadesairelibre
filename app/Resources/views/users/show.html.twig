@@ -19,24 +19,19 @@
                 <th>Mail</th>
                 <td>{{ user.mail }}</td>
             </tr>
-            <tr>
-                <th>Twitter</th>
-                <td><a href="https://twitter.com/{{ user.redes }}" target="_blank">{{ user.redes }}</a></td>
-            </tr>
+            {% if user.redes != null %}
+                <tr>
+                    <th>Twitter</th>
+                    <td><a href="https://twitter.com/{{ user.redes }}" target="_blank">{{ user.redes }}</a></td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 
-    <ul>
-        {#<li>#}
-            {#<a href="{{ path('users_index') }}">Back to the list</a>#}
-        {#</li>#}
-        <li>
-            <a class="btn" href="{{ path('users_edit', { 'id': user.id }) }}">Editar mi usuario</a>
-        </li>
-        <li>
-            {#{{ form_start(delete_form) }}#}
-                {#<input type="submit" value="Delete">#}
-            {#{{ form_end(delete_form) }}#}
-        </li>
-    </ul>
+    <a class="btn" href="{{ path('users_edit', { 'id': user.id }) }}">Editar mi usuario</a>
+    {% if app.user.rol == "ADMIN" %}
+        <a class="btn" href="{{ path('users_index') }}">Listado de usuarios</a>
+    {% endif %}
+    <p></p>
+
 {% endblock %}

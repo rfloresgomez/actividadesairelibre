@@ -37,7 +37,9 @@
         </div>
         <div class="col s12">
             <a class="btn" href="{{ path('homepage') }}">Volver</a>
-            <a class="btn" href="{{ path('routes_edit', { 'id': route.id }) }}">Editar</a>
+            {% if app.user and (app.user.rol == "ADMIN" or app.user.id == route.owner) %}
+                <a class="btn" href="{{ path('routes_edit', { 'id': route.id }) }}">Editar</a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

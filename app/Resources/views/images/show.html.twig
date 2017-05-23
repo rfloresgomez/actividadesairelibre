@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block contenido %}
+    <h2>Image</h2>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ image.id }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ image.image }}</td>
+            </tr>
+            <tr>
+                <th>Iduser</th>
+                <td>{{ image.idUser }}</td>
+            </tr>
+            <tr>
+                <th>Idroute</th>
+                <td>{{ image.idRoute }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{% if image.date %}{{ image.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('images_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('images_edit', { 'id': image.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

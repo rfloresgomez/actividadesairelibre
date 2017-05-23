@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -34,7 +35,10 @@ class RoutesType extends AbstractType
                     'Dificil' => 'Dificil',
                 ),))
             ->add('date')
-            ->add('image')
+            ->add('image', FileType::class,array(
+                "label" => "Imagen:",
+                "attr" =>array("class" => "form-control"),
+                "required" => false))
             ->add('memo')
             ->add('createdDate')
             ->add('updatedDate');

@@ -10,7 +10,7 @@
                         {% if route.route.image == null %}
                             <img class="responsive-img" src="{{ asset('assets/images/sample-1.jpg') }}">
                         {% else %}
-                            <img class="responsive-img" src="{{ asset('assets/images/' ~ route.route.image) }}">
+                            <img class="responsive-img" src="{{ asset('assets/images/routes/' ~ route.route.image) }}">
                         {% endif %}
                         <span class="card-title">{{ route.route.name }} - {{ route.route.date|date("d/m/Y") }}</span>
                     </div>

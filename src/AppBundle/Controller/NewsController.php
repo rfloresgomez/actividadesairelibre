@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\News;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * News controller.
@@ -52,6 +53,27 @@ class NewsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Recogemos el fichero
+            $file = $form['image']->getData();
+
+            if($file == null)
+                $news->setImage(null);
+            else {
+
+                // Sacamos la extensión del fichero
+                $ext = $file->guessExtension();
+
+                // Le ponemos un nombre al fichero
+                $file_name = time() . "." . $ext;
+
+                // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
+                $file->move("assets/images/news", $file_name);
+
+                // Establecemos el nombre de fichero en el atributo de la entidad
+                $news->setImage($file_name);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($news);
             $em->flush($news);
@@ -92,17 +114,40 @@ class NewsController extends Controller
         if ($this->getUser() == null)
             return $this->redirectToRoute('login');
 
-        if($this->getUser()->getRol() != 'ADMIN' && $news->getOwner() != $this->getUser()->getId())
+        if ($this->getUser()->getRol() != 'ADMIN' && $news->getOwner() != $this->getUser()->getId())
             return $this->redirectToRoute('news_index');
 
+        $image = $news->getImage();
+        $news->setImage(null);
         $deleteForm = $this->createDeleteForm($news);
         $editForm = $this->createForm('AppBundle\Form\NewsType', $news);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            // Recogemos el fichero
+            $file = $editForm['image']->getData();
+
+            if($file == null)
+                $news->setImage($image);
+            else {
+
+                // Sacamos la extensión del fichero
+                $ext = $file->guessExtension();
+
+                // Le ponemos un nombre al fichero
+                $file_name = time() . "." . $ext;
+
+                // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
+                $file->move("assets/images/news", $file_name);
+
+                // Establecemos el nombre de fichero en el atributo de la entidad
+                $news->setImage($file_name);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('news_edit', array('id' => $news->getId()));
+            return $this->redirectToRoute('news_show', array('id' => $news->getId()));
         }
 
         return $this->render('news/edit.html.twig', array(
@@ -121,7 +166,7 @@ class NewsController extends Controller
     public function deleteAction(Request $request, News $news)
     {
 
-        if($this->getUser()->getRol() != 'ADMIN' && ($this->getUser() == null || $news->getOwner() != $this->getUser()->getId()))
+        if ($this->getUser()->getRol() != 'ADMIN' && ($this->getUser() == null || $news->getOwner() != $this->getUser()->getId()))
             return $this->redirectToRoute('news_index');
 
         $form = $this->createDeleteForm($news);
@@ -148,7 +193,6 @@ class NewsController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('news_delete', array('id' => $news->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

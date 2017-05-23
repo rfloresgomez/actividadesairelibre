@@ -3,7 +3,8 @@
 {% block contenido %}
     <h2 class="center-align">Editar ruta</h2>
 
-    {{ form_start(edit_form) }}
+    {{ form_start(edit_form, { 'enctype':"multipart/form-data"}) }}
+    <a class="btn right" href="{{ path('homepage') }}">Volver</a>
 
     <div class="hide">
         {{ form_widget(edit_form.owner) }}
@@ -26,21 +27,13 @@
         {#{{ form_row(edit_form.updatedDate) }}#}
 
     </div>
-
     {{ form_widget(edit_form) }}
-    <input class="btn" type="submit" value="Editar"/>
+    <input class="btn" type="submit" value="Guardar"/>
     {{ form_end(edit_form) }}
-
-    <div>
-        <p>
-            <a class="btn" href="{{ path('homepage') }}">Volver</a>
-        </p>
-
-        <p>
-            {{ form_start(delete_form) }}
-            <input class="btn" type="submit" value="Eliminar ruta">
-            {{ form_end(delete_form) }}
-        </p>
-    </div>
+    <p></p>
+    {{ form_start(delete_form) }}
+    <input class="btn" type="submit" value="Eliminar ruta">
+    {{ form_end(delete_form) }}
+    <p></p>
 
 {% endblock %}

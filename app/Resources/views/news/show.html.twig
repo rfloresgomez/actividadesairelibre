@@ -7,7 +7,7 @@
         {% if news.image == null %}
             <img class="responsive-img" src="{{ asset('assets/images/noticia.jpg') }}">
         {% else %}
-            <img class="responsive-img" src="{{ asset('assets/images/' ~ news.image) }}">
+            <img class="responsive-img" src="{{ asset('assets/images/news/' ~ news.image) }}">
         {% endif %}
 
         <p>{{ news.description }}</p>

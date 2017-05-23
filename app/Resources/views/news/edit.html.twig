@@ -4,19 +4,13 @@
     <h2>Editar noticia</h2>
 
     {{ form_start(edit_form) }}
+    <a class="waves-effect waves-light btn right" href="{{ path('news_index') }}">Volver</a>
     {{ form_widget(edit_form) }}
-    <input class="waves-effect waves-light btn" type="submit" value="Editar"/>
+    <p></p>
+    <input class="waves-effect waves-light btn" type="submit" value="Guardar"/>
     {{ form_end(edit_form) }}
+    {{ form_start(delete_form) }}
+    <input class="waves-effect waves-light btn" type="submit" value="Eliminar noticia">
+    {{ form_end(delete_form) }}
 
-    <div>
-        <p>
-            <a class="waves-effect waves-light btn" href="{{ path('news_index') }}">Volver</a>
-        </p>
-
-        <p>
-            {{ form_start(delete_form) }}
-            <input class="waves-effect waves-light btn" type="submit" value="Eliminar">
-            {{ form_end(delete_form) }}
-        </p>
-    </div>
 {% endblock %}

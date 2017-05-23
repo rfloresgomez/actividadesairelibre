@@ -92,6 +92,27 @@ class RoutesController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Recogemos el fichero
+            $file = $form['image']->getData();
+
+            if($file == null)
+                $route->setImage(null);
+            else {
+
+                // Sacamos la extensión del fichero
+                $ext = $file->guessExtension();
+
+                // Le ponemos un nombre al fichero
+                $file_name = time() . "." . $ext;
+
+                // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
+                $file->move("assets/images/routes", $file_name);
+
+                // Establecemos el nombre de fichero en el atributo de la entidad
+                $route->setImage($file_name);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($route);
             $em->flush($route);
@@ -140,6 +161,8 @@ class RoutesController extends Controller
             return $this->redirectToRoute('homepage');
 
         $deleteForm = $this->createDeleteForm($route);
+        $image = $route->getImage();
+        $route->setImage(null);
         $editForm = $this->createForm('AppBundle\Form\RoutesType', $route);
         $editForm->handleRequest($request);
 
@@ -149,6 +172,27 @@ class RoutesController extends Controller
         $users = $repositoryUsersRoutes->findBy(['idRoute'=>$route->getId()]);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            // Recogemos el fichero
+            $file = $editForm['image']->getData();
+
+            if($file == null)
+                $route->setImage($image);
+            else {
+
+                // Sacamos la extensión del fichero
+                $ext = $file->guessExtension();
+
+                // Le ponemos un nombre al fichero
+                $file_name = time() . "." . $ext;
+
+                // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
+                $file->move("assets/images/routes", $file_name);
+
+                // Establecemos el nombre de fichero en el atributo de la entidad
+                $route->setImage($file_name);
+            }
+
             $route->setUpdatedDate(new \DateTime("now"));
             $this->getDoctrine()->getManager()->flush();
 
@@ -157,7 +201,7 @@ class RoutesController extends Controller
                     ->setSubject('Información')
                     ->setFrom('r.carlosfloresgomez@gmail.com')
                     ->setTo($user->getIdUser()->getMail())
-                    ->setBody('La ruta '.$route->getName().' a la que estás unido ha sido modificada.');
+                    ->setBody('La ruta "'.$route->getName().'" a la que estás unido ha sido modificada.');
                 $this->get('mailer')->send($message);
             }
 
@@ -192,7 +236,7 @@ class RoutesController extends Controller
             $em->flush($route);
         }
 
-        return $this->redirectToRoute('routes_index');
+        return $this->redirectToRoute('homepage');
     }
 
     /**

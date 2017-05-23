@@ -3,7 +3,7 @@
 {% block contenido %}
     <h1 class="center">Crear Rutas</h1>
 
-    {{ form_start(form) }}
+    {{ form_start(form, { 'enctype':"multipart/form-data"}) }}
 
         <div class="hide">
             {{ form_widget(form.owner) }}

@@ -3,7 +3,7 @@
 {% block contenido %}
     <h2 class="center">Nueva noticia</h2>
 
-    {{ form_start(form) }}
+    {{ form_start(form, { 'enctype':"multipart/form-data"}) }}
         {{ form_widget(form) }}
     <input id="botonRegister" class="waves-effect btn" type="submit" value="Crear Noticia" />
     {{ form_end(form) }}

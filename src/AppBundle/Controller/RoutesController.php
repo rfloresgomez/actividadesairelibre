@@ -54,21 +54,21 @@ class RoutesController extends Controller
     /**
      * Lists all route entities.
      *
-     * @Route("list", name="list_routes")
+     * @Route("routeslist/", name="list_routes")
      * @Method("GET")
      */
     public function listAction()
     {
 
-        if($this->getUser()->getRol() == null || $this->getUser()->getRol() != "ADMIN")
-            $this->redirectToRoute('homepage');
+        if($this->getUser() == null || $this->getUser()->getRol() != "ADMIN")
+            return $this->redirectToRoute('homepage');
 
         $em = $this->getDoctrine()->getManager();
 
         $routes = $em->getRepository('AppBundle:Routes')->findAll();
 
         return $this->render(':routes:listado.html.twig', array(
-            'route' => $routes,
+            'routes' => $routes,
         ));
     }
 
@@ -120,9 +120,12 @@ class RoutesController extends Controller
             return $this->redirectToRoute('routes_show', array('id' => $route->getId()));
         }
 
+        $em = $this->getDoctrine()->getManager();
+
         return $this->render('routes/new.html.twig', array(
             'route' => $route,
             'form' => $form->createView(),
+            'sites' => $em->getRepository('AppBundle:Sites')->findAll(),
         ));
     }
 

@@ -18,15 +18,15 @@
         <tbody>
         {% for route in routes %}
             <tr>
-                <td><a href="{{ path('routes_show', { 'id': route.route.id }) }}">{{ route.route.id }}</a></td>
-                <td>{{ route.route.name }}</td>
-                <td>{{ route.route.date|date('d-m-Y') }}</td>
-                <td>{{ route.route.city }}</td>
-                <td>{{ route.route.type }}</td>
-                <td>{{ route.route.dificult }}</td>
+                <td><a href="{{ path('routes_show', { 'id': route.id }) }}">{{ route.id }}</a></td>
+                <td>{{ route.name }}</td>
+                <td>{{ route.date|date('d-m-Y') }}</td>
+                <td>{{ route.city }}</td>
+                <td>{{ route.type }}</td>
+                <td>{{ route.dificult }}</td>
                 <td>
-                    <a class="btn" href="{{ path('routes_show', { 'id': route.route.id }) }}">Mostrar</a>
-                    <a class="btn" href="{{ path('routes_edit', { 'id': route.route.id }) }}">Editar</a>
+                    <a class="btn" href="{{ path('routes_show', { 'id': route.id }) }}">Mostrar</a>
+                    <a class="btn" href="{{ path('routes_edit', { 'id': route.id }) }}">Editar</a>
                 </td>
             </tr>
         {% endfor %}

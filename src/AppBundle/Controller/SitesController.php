@@ -39,11 +39,32 @@ class SitesController extends Controller
      */
     public function newAction(Request $request)
     {
-        $site = new Site();
+        $site = new Sites();
         $form = $this->createForm('AppBundle\Form\SitesType', $site);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Recogemos el fichero
+            $file = $form['image']->getData();
+
+            if($file == null)
+                $site->setImage(null);
+            else {
+
+                // Sacamos la extensión del fichero
+                $ext = $file->guessExtension();
+
+                // Le ponemos un nombre al fichero
+                $file_name = time() . "." . $ext;
+
+                // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
+                $file->move("assets/images/sites", $file_name);
+
+                // Establecemos el nombre de fichero en el atributo de la entidad
+                $site->setImage($file_name);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($site);
             $em->flush($site);

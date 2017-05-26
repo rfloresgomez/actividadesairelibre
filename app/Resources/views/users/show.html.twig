@@ -7,30 +7,33 @@
 
     <table>
         <tbody>
+        <tr>
+            <th>Name</th>
+            <td>{{ user.name }}</td>
+        </tr>
+        {#<tr>#}
+        {#<th>Pass</th>#}
+        {#<td>{{ user.password }}</td>#}
+        {#</tr>#}
+        <tr>
+            <th>Mail</th>
+            <td>{{ user.mail }}</td>
+        </tr>
+        {% if user.redes != null %}
             <tr>
-                <th>Name</th>
-                <td>{{ user.name }}</td>
+                <th>Twitter</th>
+                <td><a href="https://twitter.com/{{ user.redes }}" target="_blank">{{ user.redes }}</a></td>
             </tr>
-            {#<tr>#}
-                {#<th>Pass</th>#}
-                {#<td>{{ user.password }}</td>#}
-            {#</tr>#}
-            <tr>
-                <th>Mail</th>
-                <td>{{ user.mail }}</td>
-            </tr>
-            {% if user.redes != null %}
-                <tr>
-                    <th>Twitter</th>
-                    <td><a href="https://twitter.com/{{ user.redes }}" target="_blank">{{ user.redes }}</a></td>
-                </tr>
-            {% endif %}
+        {% endif %}
         </tbody>
     </table>
 
     <a class="btn" href="{{ path('users_edit', { 'id': user.id }) }}">Editar mi usuario</a>
     {% if app.user.rol == "ADMIN" %}
-        <a class="btn" href="{{ path('users_index') }}">Listado de usuarios</a>
+        <p>
+            <a class="btn" href="{{ path('users_index') }}">Listado de usuarios</a>
+            <a class="btn" href="{{ path('list_routes') }}">Listado de rutas</a>
+        </p>
     {% endif %}
     <p></p>
 

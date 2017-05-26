@@ -1,35 +1,21 @@
 {% extends 'layout.html.twig' %}
 
 {% block contenido %}
-    <h2>Site</h2>
+    <h2>{{ site.name }}</h2>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ site.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ site.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ site.description }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <img class="center-block" src="{{ asset('assets/images/sites/' ~ site.image) }}" alt="{{ site.name }}">
+    <div><p>{{ site.description }}</p></div>
 
     <ul>
         <li>
-            <a href="{{ path('sites_index') }}">Back to the list</a>
+            <a href="{{ path('sites_index') }}">Volver</a>
         </li>
         <li>
-            <a href="{{ path('sites_edit', { 'id': site.id }) }}">Edit</a>
+            <a href="{{ path('sites_edit', { 'id': site.id }) }}">Editar</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" value="Borrar">
             {{ form_end(delete_form) }}
         </li>
     </ul>

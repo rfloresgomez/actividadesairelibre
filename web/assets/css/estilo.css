@@ -37,3 +37,8 @@ h2{
 h5{
     color: #558b2f;
 }
+
+.margen_derecho{
+    margin-right: 15px;
+    padding-left: 25px !important;
+}

@@ -6,10 +6,8 @@
     <div>
         <h5>Sitios de interés registrados</h5>
         {% for site in sites %}
-            <div class="chip">
-                <img src="{{ asset('assets/images/sites/' ~ site.image) }}">
-                <a href="{{ path('sites_show', { 'id': site.id }) }}">{{ site.name }}</a>
-            </div>
+            <input type="checkbox" class="filled-in" id="filled-in-box"/>
+            <label class="margen_derecho" for="filled-in-box"><a href="{{ path('sites_show', { 'id': site.id }) }}">{{ site.name }}</a></label>
         {% endfor %}
         <p>Crear un nuevo sitio de interés: <a class="btn" href="{{ path('sites_new') }}">Crear</a></p>
     </div>

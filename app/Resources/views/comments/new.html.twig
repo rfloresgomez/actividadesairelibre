@@ -4,6 +4,31 @@
     <h2>Comment creation</h2>
 
     {{ form_start(form) }}
+
+        <div class="hide">
+            {{ form_widget(form.idUser) }}
+            {{ form_label(form.idUser) }}
+            {{ form_errors(form.idUser) }}
+            {#{{ form_row(form.owner) }}#}
+
+        </div>
+
+        <div class="hide">
+            {{ form_widget(form.idRoute) }}
+            {{ form_label(form.idRoute) }}
+            {{ form_errors(form.idRoute) }}
+            {#{{ form_row(form.owner) }}#}
+
+        </div>
+
+        <div class="hide">
+            {{ form_widget(form.date) }}
+            {{ form_label(form.date) }}
+            {{ form_errors(form.date) }}
+            {#{{ form_row(form.owner) }}#}
+
+        </div>
+
         {{ form_widget(form) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}

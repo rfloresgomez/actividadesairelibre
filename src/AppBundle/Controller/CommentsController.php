@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Comments;
+use AppBundle\Entity\Routes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -34,21 +35,25 @@ class CommentsController extends Controller
     /**
      * Creates a new comment entity.
      *
-     * @Route("/new", name="comments_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new/{id}", name="comments_new")
      */
-    public function newAction(Request $request)
+    public function nuevaAction(Request $request, Routes $route)
     {
-        $comment = new Comment();
+        $comment = new Comments();
         $form = $this->createForm('AppBundle\Form\CommentsType', $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $comment->setDate(new \DateTime("now"));
+            $comment->setIdRoute($route->getId());
+            $comment->setIdUser($this->getUser()->getId());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush($comment);
 
-            return $this->redirectToRoute('comments_show', array('id' => $comment->getId()));
+            return $this->redirectToRoute('routes_show', array('id' => $route->getId()));
         }
 
         return $this->render('comments/new.html.twig', array(

@@ -102,11 +102,36 @@ class SitesController extends Controller
      */
     public function editAction(Request $request, Sites $site)
     {
+
+
+        $image = $site->getImage();
+        $site->setImage(null);
         $deleteForm = $this->createDeleteForm($site);
         $editForm = $this->createForm('AppBundle\Form\SitesType', $site);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            // Recogemos el fichero
+            $file = $editForm['image']->getData();
+
+            if($file == null)
+                $site->setImage($image);
+            else {
+
+                // Sacamos la extensión del fichero
+                $ext = $file->guessExtension();
+
+                // Le ponemos un nombre al fichero
+                $file_name = time() . "." . $ext;
+
+                // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
+                $file->move("assets/images/news", $file_name);
+
+                // Establecemos el nombre de fichero en el atributo de la entidad
+                $site->setImage($file_name);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('sites_edit', array('id' => $site->getId()));

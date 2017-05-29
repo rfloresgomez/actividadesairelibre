@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CommentsType extends AbstractType
 {
@@ -13,7 +14,14 @@ class CommentsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('description')->add('idUser')->add('idRoute')->add('date')        ;
+        $builder->add('name')
+                ->add('description')
+                ->add('idUser', TextType::class, array(
+                    "required" => false))
+                ->add('idRoute', TextType::class, array(
+                    "required" => false))
+                ->add('date', TextType::class, array(
+                    "required" => false));
     }
     
     /**

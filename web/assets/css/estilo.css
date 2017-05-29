@@ -34,11 +34,16 @@ h2{
     text-align: center;
 }
 
-h5{
+h5, h6{
     color: #558b2f;
 }
 
 .margen_derecho{
     margin-right: 15px;
     padding-left: 25px !important;
+}
+
+.comment{
+    border-bottom: solid darkolivegreen 1px;
+    margin-bottom: 5px;
 }

@@ -39,6 +39,10 @@ class CommentsController extends Controller
      */
     public function nuevaAction(Request $request, Routes $route)
     {
+
+        if ($this->getUser() == null)
+            return $this->redirectToRoute('login');
+
         $comment = new Comments();
         $form = $this->createForm('AppBundle\Form\CommentsType', $comment);
         $form->handleRequest($request);

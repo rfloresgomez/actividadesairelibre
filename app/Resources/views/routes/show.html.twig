@@ -16,44 +16,68 @@
 
             <div>
                 <h5 class="light-green-text text-darken-3">Descripción de la ruta.</h5>
+
                 <p>{{ route.description }}</p>
             </div>
 
             <div id="content_mapa">
                 <h5 class="light-green-text text-darken-3">¿Dónde y cuando tendrá lugar la ruta?</h5>
+
                 <p>La ruta tendrá lugar el día <b>{{ route.date|date('d/m/Y') }}</b> en <b>{{ route.city }}</b>.</p>
             </div>
 
             <div>
                 <h5 class="light-green-text text-darken-3">Tipo y dificultad de la ruta.</h5>
+
                 <p>Tipo de ruta: <b>{{ route.type }}</b></p>
+
                 <p>Dificultad de la ruta: <b>{{ route.dificult }}</b></p>
             </div>
 
             <div>
                 <h5 class="light-green-text text-darken-3">Recomendaciones.</h5>
+
                 <p>{{ route.memo }}</p>
             </div>
 
             <div>
                 <h5>Usuarios unidos a la ruta:</h5>
                 {% for user in users_route %}
-                    {% if user.idUser.redes == null%}
+                    {% if user.idUser.redes == null %}
                         <div class="chip">{{ user.idUser.username }}</div>
                     {% else %}
-                        <div class="chip"><a href="https://twitter.com/{{ user.idUser.redes }}" target="_blank">{{ user.idUser.redes }}</a></div>
+                        <div class="chip"><a href="https://twitter.com/{{ user.idUser.redes }}"
+                                             target="_blank">{{ user.idUser.redes }}</a></div>
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
         <div class="col s12">
-            <iframe width="100%" height="350" frameborder="0" style="border:0" src="{{ 'https://www.google.com/maps/embed/v1/place?key=AIzaSyB5llLTaPzNVZCds8BIHCQhMkzcturWsa0&q=' ~ route.city ~ ", españa"}}" allowfullscreen>
+            <iframe width="100%" height="350" frameborder="0" style="border:0"
+                    src="{{ 'https://www.google.com/maps/embed/v1/place?key=AIzaSyB5llLTaPzNVZCds8BIHCQhMkzcturWsa0&q=' ~ route.city ~ ", españa" }}"
+                    allowfullscreen>
             </iframe>
+        </div>
+        <div class="col s12">
+            <h5>Comentarios</h5>
+
+
+            {% for comment in comments %}
+                <div class="col s10 offset-s1 comment">
+                    <h6>{{ comment.name }}</h6>
+
+                    <p>{{ comment.description }}</p>
+                </div>
+            {% endfor %}
+
         </div>
         <div class="col s12">
             <a class="btn" href="{{ path('homepage') }}">Volver</a>
             {% if app.user and (app.user.rol == "ADMIN" or app.user.id == route.owner) %}
                 <a class="btn" href="{{ path('routes_edit', { 'id': route.id }) }}">Editar</a>
+            {% endif %}
+            {% if app.user %}
+                <a class="btn" href="{{ path('comments_new', { 'id': route.id }) }}">Comentar</a>
             {% endif %}
         </div>
     </div>

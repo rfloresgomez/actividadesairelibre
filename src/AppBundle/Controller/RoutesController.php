@@ -141,11 +141,13 @@ class RoutesController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
+        $repositoryComments = $em->getRepository('AppBundle:Comments');
 
         return $this->render('routes/show.html.twig', array(
             'route' => $route,
             'delete_form' => $deleteForm->createView(),
             'users_route' => $repositoryUsersRoutes->findBy(['idRoute'=>$route->getId()]),
+            'comments' => $repositoryComments->findBy(['idRoute'=>$route->getId()]),
         ));
     }
 

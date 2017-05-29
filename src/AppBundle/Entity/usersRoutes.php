@@ -25,14 +25,14 @@ class usersRoutes
 
     /**
     * One Product has One Shipping.
-    * @ORM\ManyToOne(targetEntity="Users")
+    * @ORM\ManyToOne(targetEntity="Users", cascade={"remove"})
     * @ORM\JoinColumn(name="isUser", referencedColumnName="id")
     */
     private $idUser;
 
     /**
      * One Product has One Shipping.
-     * @ORM\ManyToOne(targetEntity="Routes")
+     * @ORM\ManyToOne(targetEntity="Routes", cascade={"remove"})
      * @ORM\JoinColumn(name="isRoute", referencedColumnName="id")
      */
     private $idRoute;

@@ -5,12 +5,12 @@
 
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for site in sites %}
@@ -19,14 +19,9 @@
                 <td>{{ site.name }}</td>
                 <td>{{ site.description }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('sites_show', { 'id': site.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('sites_edit', { 'id': site.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a class="btn" href="{{ path('sites_show', { 'id': site.id }) }}">Mostrar</a>
+                    <p></p>
+                    <a class="btn" href="{{ path('sites_edit', { 'id': site.id }) }}">Editar</a>
                 </td>
             </tr>
         {% endfor %}
@@ -35,7 +30,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('sites_new') }}">Create a new site</a>
+            <a class="btn" href="{{ path('sites_new') }}">Nuevo</a>
         </li>
     </ul>
 {% endblock %}

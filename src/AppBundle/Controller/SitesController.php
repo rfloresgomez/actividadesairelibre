@@ -22,6 +22,12 @@ class SitesController extends Controller
      */
     public function indexAction()
     {
+
+        if ($this->getUser() == null)
+            return $this->redirectToRoute('login');
+        elseif ($this->getUser()->getRol() != "ADMIN")
+            return $this->redirectToRoute('homepage');
+
         $em = $this->getDoctrine()->getManager();
 
         $sites = $em->getRepository('AppBundle:Sites')->findAll();

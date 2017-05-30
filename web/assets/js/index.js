@@ -18,4 +18,6 @@ $( document ).ready(function(){
     $(".quitarse").mouseleave(function () {
         $(this).html("Unido");
     });
+
+    $('.collapsible').collapsible();
 });

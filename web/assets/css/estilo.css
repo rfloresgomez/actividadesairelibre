@@ -47,3 +47,7 @@ h5, h6{
     border-bottom: solid darkolivegreen 1px;
     margin-bottom: 5px;
 }
+
+.collapsible-body{
+    border-bottom: 0px;
+}

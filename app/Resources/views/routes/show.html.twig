@@ -72,7 +72,13 @@
                 </li>
                 <li>
                     <div class="collapsible-header"><i class="material-icons">perm_media</i>Galería</div>
-                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+
+                    <div class="collapsible-body carousel carousel-slider galery">
+                        {% for image in images %}
+                            <a class="carousel-item" href="#one!"><img src="{{ asset('assets/images/galeries/' ~ image.image) }}"></a>
+                        {% endfor %}
+                    </div>
+
                 </li>
                 <li>
                     <div class="collapsible-header"><i class="material-icons">place</i>Mapa</div>

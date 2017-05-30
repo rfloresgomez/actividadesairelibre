@@ -79,6 +79,7 @@ class ImagesController extends Controller
         return $this->render('images/new.html.twig', array(
             'image' => $image,
             'form' => $form->createView(),
+            'route' => $route,
         ));
     }
 

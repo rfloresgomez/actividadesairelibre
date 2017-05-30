@@ -41,9 +41,8 @@ class ImagesController extends Controller
     public function nuevaAction(Request $request, Routes $route)
     {
 
-        if ($this->getUser() == null){
-            return $this->redirectToRoute('login');
-        }
+//        if ($this->getUser() == null)
+//            return $this->redirectToRoute('login');
 
         $image = new Images();
         $form = $this->createForm('AppBundle\Form\ImagesType', $image);
@@ -61,14 +60,14 @@ class ImagesController extends Controller
             $file_name = time() . "." . $ext;
 
             // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
-            $file->move("assets/images/galeries/",$route->getId(), $file_name);
+            $file->move("assets/images/galeries/", $file_name);
 
             // Establecemos el nombre de fichero en el atributo de la entidad
             $image->setImage($file_name);
 
             $image->setDate(new \DateTime("now"));
             $image->setIdRoute($route->getId());
-            $image->setIdUser($this->getUser()->getId());
+            $image->setIdUser(1);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($image);

@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Users
@@ -70,6 +71,12 @@ class Users implements UserInterface
      */
     private $rol;
 
+    /**
+    * @Assert\Regex(
+    *     pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/i",
+    *     message="La contraseña debe tener mayúscula, minúscula y números."
+    * )
+    */
     private $plainPassword;
 
     public function getPlainPassword()
@@ -209,7 +216,7 @@ class Users implements UserInterface
         $this->rol = $rol;
     }
 
-    
+
 
     /**
      * Returns the roles granted to the user.
@@ -279,4 +286,3 @@ class Users implements UserInterface
         return $this->username;
     }
 }
-

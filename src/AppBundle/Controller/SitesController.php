@@ -45,6 +45,10 @@ class SitesController extends Controller
      */
     public function newAction(Request $request)
     {
+
+        if ($this->getUser() == null)
+            return $this->redirectToRoute('login');
+
         $site = new Sites();
         $form = $this->createForm('AppBundle\Form\SitesType', $site);
         $form->handleRequest($request);
@@ -109,6 +113,8 @@ class SitesController extends Controller
     public function editAction(Request $request, Sites $site)
     {
 
+        if ($this->getUser() == null)
+            return $this->redirectToRoute('login');
 
         $image = $site->getImage();
         $site->setImage(null);
@@ -158,6 +164,13 @@ class SitesController extends Controller
      */
     public function deleteAction(Request $request, Sites $site)
     {
+
+        if ($this->getUser() == null)
+            return $this->redirectToRoute('login');
+
+        if($this->getUser()->getRol() != 'ADMIN')
+            return $this->redirectToRoute('homepage');
+
         $form = $this->createDeleteForm($site);
         $form->handleRequest($request);
 

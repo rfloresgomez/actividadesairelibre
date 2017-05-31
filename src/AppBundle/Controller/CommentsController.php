@@ -63,6 +63,7 @@ class CommentsController extends Controller
         return $this->render('comments/new.html.twig', array(
             'comment' => $comment,
             'form' => $form->createView(),
+            'route' => $route,
         ));
     }
 

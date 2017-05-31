@@ -1,21 +1,20 @@
 {% extends 'layout.html.twig' %}
 
 {% block contenido %}
-    <h2>Site edit</h2>
+    <h2>Editar sitio de interés</h2>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+    {{ form_widget(edit_form) }}
+    <p></p>
+    <input class="btn" type="submit" value="Editar"/>
+    <a class="btn" href="{{ path('sites_index') }}">Volver</a>
+    <p></p>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('sites_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {% if app.user and (app.user.rol == "ADMIN") %}
+        {{ form_start(delete_form) }}
+        <input class="btn" type="submit" value="Borrar">
+        <p></p>
+        {{ form_end(delete_form) }}
+    {% endif %}
 {% endblock %}

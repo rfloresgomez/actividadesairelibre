@@ -1,16 +1,13 @@
 {% extends 'layout.html.twig' %}
 
 {% block contenido %}
-    <h2>Site creation</h2>
+    <h2>Creación de sitios de interés</h2>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    <p></p>
+        <input class="btn" type="submit" value="Crear" />
+    <a class="btn" href="{{ path('routes_new') }}">Volver</a>
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('sites_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <p></p>
 {% endblock %}

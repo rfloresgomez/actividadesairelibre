@@ -3,20 +3,21 @@
 {% block contenido %}
     <h2>{{ site.name }}</h2>
 
-    <img class="center-block" src="{{ asset('assets/images/sites/' ~ site.image) }}" alt="{{ site.name }}">
+    <img class="center-block responsive-img" src="{{ asset('assets/images/sites/' ~ site.image) }}"
+         alt="{{ site.name }}">
     <div><p>{{ site.description }}</p></div>
 
-    <ul>
-        <li>
-            <a href="{{ path('sites_index') }}">Volver</a>
-        </li>
-        <li>
-            <a href="{{ path('sites_edit', { 'id': site.id }) }}">Editar</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Borrar">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <a class="btn" href="{{ path('homepage') }}">Volver</a>
+    {% if app.user%}
+        <a class="btn" href="{{ path('sites_edit', { 'id': site.id }) }}">Editar</a>
+    {% endif %}
+    <p></p>
+
+    {% if app.user and (app.user.rol == "ADMIN") %}
+        {{ form_start(delete_form) }}
+        <input class="btn" type="submit" value="Borrar">
+        <p></p>
+        {{ form_end(delete_form) }}
+    {% endif %}
+
 {% endblock %}

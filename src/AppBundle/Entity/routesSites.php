@@ -26,7 +26,7 @@ class routesSites
 
     /**
      * One Product has One Shipping.
-     * @ORM\ManyToOne(targetEntity="Sites", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Sites")
      * @ORM\JoinColumn(name="idSite", referencedColumnName="id")
      */
     private $idSite;
@@ -65,7 +65,7 @@ class routesSites
 
     /**
      * One Product has One Shipping.
-     * @ORM\ManyToOne(targetEntity="Routes", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Routes")
      * @ORM\JoinColumn(name="idRoute", referencedColumnName="id")
      */
     private $idRoute;

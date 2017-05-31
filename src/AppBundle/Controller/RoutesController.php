@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Routes;
+use AppBundle\Entity\routesSites;
 use AppBundle\Model\usersRoutesData;
 use AppBundle\Repository\usersRoutesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -95,6 +96,7 @@ class RoutesController extends Controller
 
             // Recogemos el fichero
             $file = $form['image']->getData();
+            $sites = $request->get('sites');
 
             if($file == null)
                 $route->setImage(null);
@@ -116,6 +118,20 @@ class RoutesController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($route);
             $em->flush($route);
+
+            $repositoryRoutesSites = $em->getRepository('AppBundle:Sites');
+            if($sites != null){
+                foreach ($sites as $site){
+                    $routeSite = new routesSites();
+                    $routeSite->setIdRoute($route);
+                    $routeSite->setIdSite($repositoryRoutesSites->findOneBy(['id'=>$site]));
+
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($routeSite);
+                    $em->flush($routeSite);
+                }
+            }
 
             return $this->redirectToRoute('routes_show', array('id' => $route->getId()));
         }
@@ -143,6 +159,7 @@ class RoutesController extends Controller
         $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
         $repositoryComments = $em->getRepository('AppBundle:Comments');
         $repositoryImages = $em->getRepository('AppBundle:Images');
+        $repositorySites = $em->getRepository('AppBundle:routesSites');
 
         return $this->render('routes/show.html.twig', array(
             'route' => $route,
@@ -150,6 +167,7 @@ class RoutesController extends Controller
             'users_route' => $repositoryUsersRoutes->findBy(['idRoute'=>$route->getId()]),
             'comments' => $repositoryComments->findBy(['idRoute'=>$route->getId()]),
             'images' => $repositoryImages->findBy(['idRoute'=>$route->getId()]),
+            'sites' => $repositorySites->findBy(['idRoute'=>$route->getId()]),
         ));
     }
 

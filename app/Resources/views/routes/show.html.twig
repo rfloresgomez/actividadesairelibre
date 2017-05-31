@@ -51,6 +51,18 @@
                     {% endif %}
                 {% endfor %}
             </div>
+
+        </div>
+        <div class="col s12">
+            <h5>Sitios de interés:</h5>
+            {% for site in sites %}
+
+                <div class="chip">
+                    <img src="{{ asset('assets/images/sites/') ~ site.idSite.image }}" alt="Site">
+                    <a href="{{ path('sites_show', { 'id': site.idSite.id }) }}">{{ site.idSite.name }}</a>
+                </div>
+
+            {% endfor %}
         </div>
         <div class="col s12">
             <ul class="collapsible popout" data-collapsible="accordion">
@@ -75,7 +87,8 @@
 
                     <div class="collapsible-body carousel carousel-slider galery">
                         {% for image in images %}
-                            <a class="carousel-item" href="#one!"><img src="{{ asset('assets/images/galeries/' ~ image.image) }}"></a>
+                            <a class="carousel-item" href="#one!"><img
+                                        src="{{ asset('assets/images/galeries/' ~ image.image) }}"></a>
                         {% endfor %}
                     </div>
 

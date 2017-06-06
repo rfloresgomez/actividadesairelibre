@@ -31,6 +31,18 @@
         {% endif %}
         </tbody>
     </table>
+    <div class="row s12">
+        <h5>Rutas a las que estás unido:</h5>
+        {% for route in users_route %}
+
+            <div class="chip">
+                <img src="{{ asset('assets/images/routes/') ~ route.idRoute.image }}" alt="Contact Person">
+                <a href="{{ path('routes_show', { 'id': route.idRoute.id }) }}">{{ route.idRoute.name }}</a>
+            </div>
+
+        {% endfor %}
+    </div>
+
 
     <a class="btn" href="{{ path('users_edit', { 'id': user.id }) }}">Editar mi usuario</a>
     {% if app.user.rol == "ADMIN" %}

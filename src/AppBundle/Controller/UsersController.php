@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Users;
+use AppBundle\Entity\usersRoutes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -93,11 +94,14 @@ class UsersController extends Controller
         if ($this->getUser()->getRol() != 'ADMIN' && ($this->getUser() == null || $user->getId() != $this->getUser()->getId()))
             return $this->redirectToRoute("homepage");
 
+        $em = $this->getDoctrine()->getManager();
         $deleteForm = $this->createDeleteForm($user);
+        $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
 
         return $this->render('users/show.html.twig', array(
             'user' => $user,
             'delete_form' => $deleteForm->createView(),
+            'users_route' => $repositoryUsersRoutes->findBy(['idUser'=>$this->getUser()->getId()]),
         ));
     }
 

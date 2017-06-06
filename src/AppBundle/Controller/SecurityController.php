@@ -20,8 +20,7 @@ class SecurityController extends Controller
     {
 
         if ($this->getUser() != null && in_array("ROLE_STANDARD", $this->getUser()->getRoles()))
-            return $this->render(':users:show.html.twig', array(
-                'user' => $this->getUser()));
+            return $this->redirectToRoute('users_show', array('id' => $this->getUser()->getId()));
 
         // Recupera el servicio de autenticación
         $authenticationUtils = $this->get('security.authentication_utils');

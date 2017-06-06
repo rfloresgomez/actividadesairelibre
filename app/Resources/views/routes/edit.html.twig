@@ -32,7 +32,22 @@
     {{ form_end(edit_form) }}
     <p></p>
     {{ form_start(delete_form) }}
-    <input class="btn" type="submit" value="Eliminar ruta">
+
+    <!-- Modal Trigger -->
+    <a class="waves-effect waves-light btn" href="#modal1">Eliminar</a>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Eliminar ruta</h4>
+            <p>¿Estás seguro que quieres eliminar la ruta? Hay usuarios unidos a ella.</p>
+        </div>
+        <div class="modal-footer">
+            <input class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" value="Eliminar ruta">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+        </div>
+    </div>
+
     {{ form_end(delete_form) }}
     <p></p>
 

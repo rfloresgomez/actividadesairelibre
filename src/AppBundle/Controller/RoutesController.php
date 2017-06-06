@@ -257,6 +257,19 @@ class RoutesController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
+            $users = $repositoryUsersRoutes->findBy(['idRoute'=>$route->getId()]);
+
+            foreach ($users as $user){
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Ruta cancelada')
+                    ->setFrom('r.carlosfloresgomez@gmail.com')
+                    ->setTo($user->getIdUser()->getMail())
+                    ->setBody('La ruta "'.$route->getName().'" a la que estás unido ha sido cancelada.');
+                $this->get('mailer')->send($message);
+            }
+
             $em->remove($route);
             $em->flush($route);
         }

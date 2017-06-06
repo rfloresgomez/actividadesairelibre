@@ -13,8 +13,22 @@
 
     {% if app.user and (app.user.rol == "ADMIN") %}
         {{ form_start(delete_form) }}
-        <input class="btn" type="submit" value="Borrar">
-        <p></p>
+
+        <!-- Modal Trigger -->
+        <a class="waves-effect waves-light btn" href="#modal1">Eliminar</a>
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Eliminar sitio de interés</h4>
+                <p>¿Estás seguro que quieres eliminar el sitio de interés? Hay rutas enlazadas a este sitio de interés.</p>
+            </div>
+            <div class="modal-footer">
+                <input class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" value="Eliminar sitio de interés">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+            </div>
+        </div>
+
         {{ form_end(delete_form) }}
     {% endif %}
 {% endblock %}

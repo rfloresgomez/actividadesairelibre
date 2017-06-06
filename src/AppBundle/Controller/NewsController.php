@@ -33,6 +33,27 @@ class NewsController extends Controller
     }
 
     /**
+     * Lists all route entities.
+     *
+     * @Route("routeslist/", name="list_news")
+     * @Method("GET")
+     */
+    public function listAction()
+    {
+
+        if($this->getUser() == null || $this->getUser()->getRol() != "ADMIN")
+            return $this->redirectToRoute('homepage');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $routes = $em->getRepository('AppBundle:News')->findAll();
+
+        return $this->render('news/listado.html.twig', array(
+            'routes' => $routes,
+        ));
+    }
+
+    /**
      * Creates a new news entity.
      *
      * @Route("/new", name="news_new")

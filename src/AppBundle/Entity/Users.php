@@ -17,6 +17,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     errorPath="username",
  *     message="El nombre de usuario ya existe."
  * )
+ *
+ * @UniqueEntity(
+ *     fields={"mail"},
+ *     errorPath="mail",
+ *     message="El email ya está registrado."
+ * )
  */
 class Users implements UserInterface
 {

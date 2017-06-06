@@ -73,6 +73,13 @@ class UsersController extends Controller
             $em->persist($user);
             $em->flush($user);
 
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Bienvenido')
+                ->setFrom('r.carlosfloresgomez@gmail.com')
+                ->setTo($user->getMail())
+                ->setBody('Bienvenido "'.$user->getUsername().'", ya puedes comenzar a crear rutas y unirte a aquellas que más te gusten. Disfruta!!!');
+            $this->get('mailer')->send($message);
+
             return $this->redirectToRoute('login');
         }
 

@@ -1,0 +1,35 @@
+{% extends '::layout.html.twig' %}
+
+{% block contenido %}
+    <h2>Lista de rutas</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Título</th>
+            <th>Descripción</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for route in routes %}
+            <tr>
+                <td><a href="{{ path('routes_show', { 'id': route.id }) }}">{{ route.id }}</a></td>
+                <td>{{ route.title }}</td>
+                <td>{{ route.description }}</td>
+                <td>
+                    <a class="btn" href="{{ path('news_show', { 'id': route.id }) }}">Mostrar</a>
+                    <p></p>
+                    <a class="btn" href="{{ path('news_edit', { 'id': route.id }) }}">Editar</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a class="btn" href="{{ path('news_new') }}">Crear nueva noticia</a>
+        </li>
+    </ul>
+{% endblock %}

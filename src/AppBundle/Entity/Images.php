@@ -33,7 +33,7 @@ class Images
      *
      * @ORM\Column(name="idUser", type="string", length=255)
      */
-    private $idUser;
+    private $name;
 
     /**
      * @var string
@@ -91,9 +91,9 @@ class Images
      *
      * @return Images
      */
-    public function setIdUser($idUser)
+    public function setName($idUser)
     {
-        $this->idUser = $idUser;
+        $this->name = $idUser;
 
         return $this;
     }
@@ -103,9 +103,9 @@ class Images
      *
      * @return string
      */
-    public function getIdUser()
+    public function getname()
     {
-        return $this->idUser;
+        return $this->name;
     }
 
     /**

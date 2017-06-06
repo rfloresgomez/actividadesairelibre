@@ -20,13 +20,7 @@
 
     </div>
 
-    <div class="input-field hide">
-        {{ form_widget(form.idUser) }}
-        {{ form_label(form.idUser) }}
-        {{ form_errors(form.idUser) }}
-        {#{{ form_row(form.rol) }}#}
 
-    </div>
 
 
 
@@ -50,7 +44,7 @@
                     {% else %}
                         <option value="{{ imageOne.image }}"
                                 data-icon="{{ asset('assets/images/galeries/') ~ imageOne.image }}" class="left circle">
-                            Imagen
+                            {{ imageOne.name }}
                         </option>
 
                         {% set items = items|merge([imageOne.image]) %}

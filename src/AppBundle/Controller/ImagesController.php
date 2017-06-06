@@ -77,7 +77,7 @@ class ImagesController extends Controller
 
             $image->setDate(new \DateTime("now"));
             $image->setIdRoute($route->getId());
-            $image->setIdUser(1);
+//            $image->setIdUser(1);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($image);

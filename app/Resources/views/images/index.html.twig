@@ -1,41 +1,24 @@
 {% extends 'layout.html.twig' %}
 
 {% block contenido %}
-    <h2>Images list</h2>
+    <h2>Imágenes de galerías</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Image</th>
-                <th>Iduser</th>
-                <th>Idroute</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
         {% for image in images %}
-            <tr>
-                <td><a href="{{ path('images_show', { 'id': image.id }) }}">{{ image.id }}</a></td>
-                <td>{{ image.image }}</td>
-                <td>{{ image.idUser }}</td>
-                <td>{{ image.idRoute }}</td>
-                <td>{% if image.date %}{{ image.date|date('Y-m-d') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('images_show', { 'id': image.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('images_edit', { 'id': image.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
+            <div class="row">
+                <div class="col s2 m3">
+                    {{ image.id }}
+                </div>
+                <div class="col s2 m3">
+                    {{ image.name }}
+                </div>
+                <div class="col s2 m3">
+                    <img src="{{ asset('assets/images/galeries/') ~ image.image }}" alt="Imagen" height="50px" width="50px">
+                </div>
+                <div class="col s6 m3">
+                    <a class="btn" href="{{ path('images_delete', {'id': image.id}) }}">Eliminar</a>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
 
     {#<ul>#}
         {#<li>#}

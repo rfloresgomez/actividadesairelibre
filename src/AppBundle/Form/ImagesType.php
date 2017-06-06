@@ -19,7 +19,7 @@ class ImagesType extends AbstractType
                     "label" => "Imagen:",
                     "attr" =>array("class" => "form-control"),
                     "required" => false))
-                ->add('idUser', TextType::class, array(
+                ->add('name', TextType::class, array(
                     "required" => false))
                 ->add('idRoute', TextType::class, array(
                     "required" => false))

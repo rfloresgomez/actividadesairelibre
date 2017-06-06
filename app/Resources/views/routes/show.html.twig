@@ -85,11 +85,14 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">perm_media</i>Galería</div>
 
-                    <div class="collapsible-body carousel carousel-slider galery">
-                        {% for image in images %}
-                            <a class="carousel-item" href="#one!"><img
-                                        src="{{ asset('assets/images/galeries/' ~ image.image) }}"></a>
-                        {% endfor %}
+                    <div class="collapsible-body">
+                        <div class="slider">
+                            <ul class="slides">
+                                {% for image in images %}
+                                    <li><img class="responsive-img" src="{{ asset('assets/images/galeries/' ~ image.image) }}"></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
 
                 </li>

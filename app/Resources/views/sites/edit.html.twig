@@ -7,7 +7,7 @@
     {{ form_widget(edit_form) }}
     <p></p>
     <input class="btn" type="submit" value="Editar"/>
-    <a class="btn" href="{{ path('sites_index') }}">Volver</a>
+    <a class="btn" href="{{ path('sites_show', { 'id': site.id }) }}">Volver</a>
     <p></p>
     {{ form_end(edit_form) }}
 

@@ -18,7 +18,7 @@ class ImagesType extends AbstractType
         $builder->add('image', FileType::class,array(
                     "label" => "Imagen:",
                     "attr" =>array("class" => "form-control"),
-                    "required" => true))
+                    "required" => false))
                 ->add('idUser', TextType::class, array(
                     "required" => false))
                 ->add('idRoute', TextType::class, array(

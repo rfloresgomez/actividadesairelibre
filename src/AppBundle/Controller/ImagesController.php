@@ -44,6 +44,10 @@ class ImagesController extends Controller
 //        if ($this->getUser() == null)
 //            return $this->redirectToRoute('login');
 
+        $em = $this->getDoctrine()->getManager();
+
+        $images = $em->getRepository('AppBundle:Images')->findAll();
+
         $image = new Images();
         $form = $this->createForm('AppBundle\Form\ImagesType', $image);
         $form->handleRequest($request);
@@ -52,18 +56,24 @@ class ImagesController extends Controller
 
             // Recogemos el fichero
             $file = $form['image']->getData();
+            if($file != null){
+                // Sacamos la extensión del fichero
+                $ext = $file->guessExtension();
 
-            // Sacamos la extensión del fichero
-            $ext = $file->guessExtension();
+                // Le ponemos un nombre al fichero
+                $file_name = time() . "." . $ext;
 
-            // Le ponemos un nombre al fichero
-            $file_name = time() . "." . $ext;
+                // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
+                $file->move("assets/images/galeries/", $file_name);
 
-            // Guardamos el fichero en el directorio uploads que estará en el directorio /web del framework
-            $file->move("assets/images/galeries/", $file_name);
+                // Establecemos el nombre de fichero en el atributo de la entidad
+                $image->setImage($file_name);
+            }else{
+                $imageRadio = $request->get('imageSelect');
+                $image->setImage($imageRadio);
+            }
 
-            // Establecemos el nombre de fichero en el atributo de la entidad
-            $image->setImage($file_name);
+
 
             $image->setDate(new \DateTime("now"));
             $image->setIdRoute($route->getId());
@@ -80,6 +90,7 @@ class ImagesController extends Controller
             'image' => $image,
             'form' => $form->createView(),
             'route' => $route,
+            'images' => $images,
         ));
     }
 

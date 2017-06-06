@@ -53,21 +53,30 @@ h5, h6{
 }
 
 @media screen and (min-width: 980px){
-    .galery{
+    .slider{
+        height: 550px !important;
+    }
+
+    .slides{
         height: 500px !important;
     }
 
-    .galery img{
+    .slides img{
         height: 100% !important;
+        width: 100% !important;
     }
 }
 
 @media screen and (max-width: 979px){
-    .galery{
+    .slider{
+        height: 200px !important;
+    }
+
+    .slides{
         height: 150px !important;
     }
 
-    .galery img{
+    .slides img{
         height: 150px !important;
     }
 }
@@ -76,3 +85,16 @@ h5, h6{
     padding-top: 10px;
 }
 
+.tabs .tab a:hover, .tabs .tab a.active{
+    color: #558b2f !important;
+    border-color: #558b2f !important;
+}
+
+.tabs .tab a{
+    color: #689f38 !important;
+    border-color: #689f38 !important;
+}
+
+.tabs .indicator{
+    background-color: #558b2f !important;
+}

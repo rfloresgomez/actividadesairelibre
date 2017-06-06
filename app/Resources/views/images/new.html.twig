@@ -4,8 +4,6 @@
     <h2>Image creation</h2>
 
     {{ form_start(form, { 'enctype':"multipart/form-data"}) }}
-
-
     <div class="input-field hide">
         {{ form_widget(form.date) }}
         {{ form_label(form.date) }}
@@ -30,7 +28,38 @@
 
     </div>
 
-    {{ form_widget(form) }}
+
+
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a class="active" href="#test1">Subir</a></li>
+                <li class="tab col s3"><a href="#test2">Seleccionar existente</a></li>
+            </ul>
+            <p></p>
+        </div>
+        <div id="test1" class="col s12">
+            {{ form_widget(form) }}
+        </div>
+        <div id="test2" class="col s12">
+            <select name="imageSelect">
+                <option value="" disabled selected>Selecciona la imagen</option>
+                {% set items = {} %}
+                {% for imageOne in images %}
+                    {% if imageOne.image in items %}
+                    {% else %}
+                        <option value="{{ imageOne.image }}"
+                                data-icon="{{ asset('assets/images/galeries/') ~ imageOne.image }}" class="left circle">
+                            Imagen
+                        </option>
+
+                        {% set items = items|merge([imageOne.image]) %}
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
     <p></p>
     <input class="btn" type="submit" value="Subir"/>
     {{ form_end(form) }}

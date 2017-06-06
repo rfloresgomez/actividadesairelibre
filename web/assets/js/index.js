@@ -21,8 +21,8 @@ $( document ).ready(function(){
 
     $('.collapsible').collapsible();
 
+    $('.slider').slider();
 
-    $('.carousel.carousel-slider').carousel({fullWidth: true, indicators: true, noWrap: true});
-
+    $('ul.tabs').tabs();
 
 });

@@ -5,10 +5,12 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class RoutesType extends AbstractType
 {
@@ -27,7 +29,7 @@ class RoutesType extends AbstractType
                     'Vía verde' => 'Vía Verde',
                     'Camino mozárabe' => 'Camino mozárabe',
                     'Trail' => 'Trail',
-                    'Montaña' => 'Monataña',
+                    'Montaña' => 'Montaña',
                 ),))
             ->add('dificult', ChoiceType::class, array(
                 'choices'  => array(
@@ -35,7 +37,8 @@ class RoutesType extends AbstractType
                     'Media' => 'Media',
                     'Dificil' => 'Dificil',
                 ),))
-            ->add('date')
+            ->add('date', TextType::class, array(
+                "required" => false))
             ->add('image', FileType::class,array(
                 "label" => "Imagen:",
                 "attr" =>array("class" => "form-control"),

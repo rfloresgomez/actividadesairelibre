@@ -27,7 +27,12 @@ class RoutesController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $routes = $em->getRepository('AppBundle:Routes')->findAll();
+        $query = $em->createQuery(
+            'SELECT r FROM AppBundle:Routes r WHERE r.date > :hoy ORDER BY r.date ASC'
+        )->setParameter('hoy', new \DateTime("now"));
+
+//        $routes = $em->getRepository('AppBundle:Routes')->findBy([], ['date' => 'ASC']);
+        $routes = $query->getResult();
         /** @var usersRoutesRepository $repositoryUsersRoutes */
         $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
         // $rutasUnidas = $repositoryUsersRoutes->findBy(['idUser'=>$this->getUser()->getId()]);
@@ -49,6 +54,46 @@ class RoutesController extends Controller
               'routes' => $data,
               'userLoged' => $this->getUser(),
           ));
+        }
+    }
+
+    /**
+     * Lists all route entities.
+     *
+     * @Route("/historicoRutas", name="historico")
+     * @Method("GET")
+     */
+    public function historicoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->createQuery(
+            'SELECT r FROM AppBundle:Routes r WHERE r.date < :hoy ORDER BY r.date ASC'
+        )->setParameter('hoy', new \DateTime("now"));
+
+//        $routes = $em->getRepository('AppBundle:Routes')->findBy([], ['date' => 'ASC']);
+        $routes = $query->getResult();
+        /** @var usersRoutesRepository $repositoryUsersRoutes */
+        $repositoryUsersRoutes = $em->getRepository('AppBundle:usersRoutes');
+        // $rutasUnidas = $repositoryUsersRoutes->findBy(['idUser'=>$this->getUser()->getId()]);
+        $data = [];
+        foreach ($routes as $route){
+            $usersRoutes = $repositoryUsersRoutes->findByIdRoute($route->getId());
+            $data[] = new usersRoutesData($route, $usersRoutes);
+        }
+
+        if($this->getUser() != null){
+            return $this->render('routes/historico.html.twig', array(
+                'routes' => $data,
+                'userLoged' => $this->getUser(),
+                'rutasUnidas' => $repositoryUsersRoutes->findBy(['idUser'=>$this->getUser()->getId()]),
+            ));
+        }
+        else {
+            return $this->render('routes/historico.html.twig', array(
+                'routes' => $data,
+                'userLoged' => $this->getUser(),
+            ));
         }
     }
 
@@ -85,6 +130,7 @@ class RoutesController extends Controller
         if ($this->getUser() == null)
             return $this->redirectToRoute('login');
 
+
         $route = new Routes();
         $route->setCreatedDate(new \DateTime("now"));
         $route->setUpdatedDate(new \DateTime("now"));
@@ -97,6 +143,8 @@ class RoutesController extends Controller
             // Recogemos el fichero
             $file = $form['image']->getData();
             $sites = $request->get('sites');
+            $fecha = $request->get('fecha');
+            $route->setDate(new \DateTime($fecha));
 
             if($file == null)
                 $route->setImage(null);

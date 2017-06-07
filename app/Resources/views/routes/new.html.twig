@@ -39,7 +39,17 @@
 
     </div>
 
+    <div class="hide">
+        {{ form_widget(form.date) }}
+        {{ form_label(form.date) }}
+        {{ form_errors(form.date) }}
+        {#{{ form_row(form.date) }}#}
+
+    </div>
+
     {{ form_widget(form) }}
+    <label for="date">Fecha de celebración</label>
+    <input name="fecha" type="date" class="datepicker" required>
     <input class="btn" type="submit" value="Crear"/>
     <a class="btn" href="{{ path('homepage') }}">Volver</a>
     {{ form_end(form) }}

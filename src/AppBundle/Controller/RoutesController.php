@@ -233,6 +233,7 @@ class RoutesController extends Controller
         if($this->getUser()->getRol() != 'ADMIN' && $route->getOwner() != $this->getUser()->getId())
             return $this->redirectToRoute('homepage');
 
+
         $deleteForm = $this->createDeleteForm($route);
         $image = $route->getImage();
         $route->setImage(null);

@@ -27,7 +27,18 @@
         {#{{ form_row(edit_form.updatedDate) }}#}
 
     </div>
+
+    <div class="hide">
+        {{ form_widget(edit_form.date) }}
+        {{ form_label(edit_form.date) }}
+        {{ form_errors(edit_form.date) }}
+        {#{{ form_row(edit_form.date) }}#}
+
+    </div>
     {{ form_widget(edit_form) }}
+    <p>Fecha de celebración actual: {{ route.date|date("d/m/Y") }}</p>
+    <label for="date">Fecha de celebración</label>
+    <input name="fecha" type="date" class="datepicker" required>
     <input class="btn" type="submit" value="Guardar"/>
     {{ form_end(edit_form) }}
     <p></p>

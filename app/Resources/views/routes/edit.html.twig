@@ -35,10 +35,24 @@
         {#{{ form_row(edit_form.date) }}#}
 
     </div>
+
+    <div class="hide">
+        {{ form_widget(edit_form.dateLimit) }}
+        {{ form_label(edit_form.dateLimit) }}
+        {{ form_errors(edit_form.dateLimit) }}
+        {#{{ form_row(edit_form.dateLimit) }}#}
+
+    </div>
+
     {{ form_widget(edit_form) }}
     <p>Fecha de celebración actual: {{ route.date|date("d/m/Y") }}</p>
+    <p>Fecha límite actual: {{ route.dateLimit|date("d/m/Y") }}</p>
     <label for="date">Fecha de celebración</label>
     <input name="fecha" type="date" class="datepicker">
+
+    <label for="date">Fecha límite de inscripción</label>
+    <input name="fechaLimite" type="date" class="datepicker">
+
     <input class="btn" type="submit" value="Guardar"/>
     {{ form_end(edit_form) }}
     <p></p>

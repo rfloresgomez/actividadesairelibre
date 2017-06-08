@@ -71,6 +71,29 @@ class Routes
     private $date;
 
     /**
+     * @return string
+     */
+    public function getDateLimit()
+    {
+        return $this->dateLimit;
+    }
+
+    /**
+     * @param string $dateLimit
+     */
+    public function setDateLimit($dateLimit)
+    {
+        $this->dateLimit = $dateLimit;
+    }
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dateLimit", type="date")
+     */
+    private $dateLimit;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255, nullable=true)

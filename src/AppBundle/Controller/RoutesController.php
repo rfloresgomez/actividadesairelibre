@@ -144,7 +144,9 @@ class RoutesController extends Controller
             $file = $form['image']->getData();
             $sites = $request->get('sites');
             $fecha = $request->get('fecha');
+            $fechaLimite = $request->get('fechaLimite');
             $route->setDate(new \DateTime($fecha));
+            $route->setDateLimit(new \DateTime($fechaLimite));
 
             if($file == null)
                 $route->setImage(null);
@@ -270,6 +272,10 @@ class RoutesController extends Controller
             $fecha = $request->get('fecha');
             if($fecha != "")
                 $route->setDate(new \DateTime($fecha));
+
+            $fechaLimite = $request->get('fechaLimite');
+            if($fechaLimite != "")
+                $route->setDateLimit(new \DateTime($fechaLimite));
 
             $route->setUpdatedDate(new \DateTime("now"));
             $this->getDoctrine()->getManager()->flush();

@@ -12,7 +12,7 @@
                         {% else %}
                             <img class="responsive-img" src="{{ asset('assets/images/routes/' ~ route.route.image) }}">
                         {% endif %}
-                        <span class="card-title">- {{ route.route.name }}<br/>- Fecha de celebración: {{ route.route.date|date("d/m/Y") }}<br/>- Fecha límite de inscripción: {{ route.route.date|date("d/m/Y") }}</span>
+                        <span class="card-title">- {{ route.route.name }}<br/>- Fecha de celebración: {{ route.route.date|date("d/m/Y") }}<br/>- Fecha límite de inscripción: {{ route.route.dateLimit|date("d/m/Y") }}</span>
                     </div>
                     <div class="card-content">
                         <p>{{ route.route.description }}</p>
@@ -32,7 +32,9 @@
                                     {% set isUser = true %}
                                 {% endif %}
                             {% endfor %}
-                            {% if isUser %}
+                            {% if date(route.route.dateLimit) < date('today')%}
+                                <a class="red-text">La fecha de inscripción ha pasado.</a>
+                            {% elseif isUser %}
                                 <a class="quitarse green-text" href="{{ path('usersroutes_delete', { 'id': route.route.id }) }}">Unido</a>
                             {% elseif isDate %}
                                 <a class="red-text">Ya estás unido a una ruta el mismo día.</a>

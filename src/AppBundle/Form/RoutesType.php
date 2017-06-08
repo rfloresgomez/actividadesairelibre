@@ -39,6 +39,8 @@ class RoutesType extends AbstractType
                 ),))
             ->add('date', DateType::class, array(
                 "required" => false))
+            ->add('dateLimit', DateType::class, array(
+                "required" => false))
             ->add('image', FileType::class,array(
                 "label" => "Imagen:",
                 "attr" =>array("class" => "form-control"),

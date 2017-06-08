@@ -6,14 +6,24 @@ $( document ).ready(function(){
     $('select').material_select();
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year
-        months_full: [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ],
-        months_short: [ 'En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ],
-        weekdays_full: [ 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo' ],
-        weekdays_short: [ 'Lun', 'MAr', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom' ],
+        selectYears: 1, // Creates a dropdown of 15 years to control year
+        monthsFull: [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ],
+        monthsShort: [ 'En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ],
+        weekdaysFull: [ 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado' ],
+        weekdaysShort: [ 'L', 'M', 'X', 'J', 'V', 'S', 'D' ],
+        showMonthsShort: undefined,
+        showWeekdaysFull: undefined,
         month_prev: '&#9664;',
         month_next: '&#9654;',
         format: 'yyyy/mm/dd',
+        firstDay: 1,
+        min: new Date(),
+        today: 'Hoy',
+        clear: 'Limpiar',
+        close: 'Cerrar',
+        labelMonthNext: 'Mes siguiente',
+        labelMonthPrev: 'Mes anterior',
+        labelMonthSelect: 'Selecciona un mes'
     });
     $('#textarea1').val('New Text');
     $('#textarea1').trigger('autoresize');

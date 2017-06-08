@@ -28,8 +28,8 @@ class RoutesController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $query = $em->createQuery(
-            'SELECT r FROM AppBundle:Routes r WHERE r.date > :hoy ORDER BY r.date ASC'
-        )->setParameter('hoy', new \DateTime("now"));
+            'SELECT r FROM AppBundle:Routes r WHERE r.date >= :hoy ORDER BY r.date ASC'
+        )->setParameter('hoy', new \DateTime("today"));
 
 //        $routes = $em->getRepository('AppBundle:Routes')->findBy([], ['date' => 'ASC']);
         $routes = $query->getResult();
@@ -69,7 +69,7 @@ class RoutesController extends Controller
 
         $query = $em->createQuery(
             'SELECT r FROM AppBundle:Routes r WHERE r.date < :hoy ORDER BY r.date ASC'
-        )->setParameter('hoy', new \DateTime("now"));
+        )->setParameter('hoy', new \DateTime("today"));
 
 //        $routes = $em->getRepository('AppBundle:Routes')->findBy([], ['date' => 'ASC']);
         $routes = $query->getResult();

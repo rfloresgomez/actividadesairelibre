@@ -12,7 +12,7 @@
                         {% else %}
                             <img class="responsive-img" src="{{ asset('assets/images/routes/' ~ route.route.image) }}">
                         {% endif %}
-                        <span class="card-title">{{ route.route.name }} - {{ route.route.date|date("d/m/Y") }}</span>
+                        <span class="card-title">- {{ route.route.name }}<br/>- Fecha de celebración: {{ route.route.date|date("d/m/Y") }}<br/>- Fecha límite de inscripción: {{ route.route.date|date("d/m/Y") }}</span>
                     </div>
                     <div class="card-content">
                         <p>{{ route.route.description }}</p>

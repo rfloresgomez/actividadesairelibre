@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Image controller.
  *
- * @Route("images")
+ * @Route("imagenes")
  */
 class ImagesController extends Controller
 {
@@ -24,6 +24,13 @@ class ImagesController extends Controller
      */
     public function indexAction()
     {
+
+        if ($this->getUser() == null)
+            return $this->redirectToRoute('login');
+
+        elseif ($this->getUser()->getRol() != "ADMIN")
+            return $this->redirectToRoute('homepage');
+
         $em = $this->getDoctrine()->getManager();
 
         $images = $em->getRepository('AppBundle:Images')->findAll();
@@ -41,8 +48,8 @@ class ImagesController extends Controller
     public function nuevaAction(Request $request, Routes $route)
     {
 
-//        if ($this->getUser() == null)
-//            return $this->redirectToRoute('login');
+        if ($this->getUser() == null)
+            return $this->redirectToRoute('login');
 
         $em = $this->getDoctrine()->getManager();
 

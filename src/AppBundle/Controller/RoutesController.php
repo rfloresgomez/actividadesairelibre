@@ -267,6 +267,10 @@ class RoutesController extends Controller
                 $route->setImage($file_name);
             }
 
+            $fecha = $request->get('fecha');
+            if($fecha != "")
+                $route->setDate(new \DateTime($fecha));
+
             $route->setUpdatedDate(new \DateTime("now"));
             $this->getDoctrine()->getManager()->flush();
 

@@ -38,7 +38,7 @@
     {{ form_widget(edit_form) }}
     <p>Fecha de celebración actual: {{ route.date|date("d/m/Y") }}</p>
     <label for="date">Fecha de celebración</label>
-    <input name="fecha" type="date" class="datepicker" required>
+    <input name="fecha" type="date" class="datepicker">
     <input class="btn" type="submit" value="Guardar"/>
     {{ form_end(edit_form) }}
     <p></p>

@@ -71,6 +71,7 @@ class ImagesController extends Controller
             }else{
                 $imageRadio = $request->get('imageSelect');
                 $image->setImage($imageRadio);
+                $image->setName("Imagen existente");
             }
 
 

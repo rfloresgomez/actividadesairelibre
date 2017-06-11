@@ -100,3 +100,7 @@ h5, h6{
 .tabs .indicator{
     background-color: #558b2f !important;
 }
+
+.card-title p{
+    font-size: 18px;
+}

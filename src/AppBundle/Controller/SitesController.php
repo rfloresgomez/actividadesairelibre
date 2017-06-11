@@ -79,7 +79,7 @@ class SitesController extends Controller
             $em->persist($site);
             $em->flush($site);
 
-            return $this->redirectToRoute('sites_show', array('id' => $site->getId()));
+            return $this->redirectToRoute('routes_new', array('id' => $site->getId()));
         }
 
         return $this->render('sites/new.html.twig', array(
